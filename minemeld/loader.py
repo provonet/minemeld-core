@@ -7,7 +7,7 @@ from collections import namedtuple
 
 try:
     if parse_version(pip.__version__) >= parse_version('10.0.0'):
-        from pip._internal import get_installed_distributions  # pylint: disable=E0611,E0401
+        from pkg_resources import working_set # pylint: disable=E0611,E0401
     else:
         from pip import get_installed_distributions  # pylint: disable=E0611,E0401
 except:
@@ -34,7 +34,7 @@ _WS = None
 
 def _installed_versions():
     if parse_version(pip.__version__) >= parse_version('10.0.0'):
-        installed_dists = get_installed_distributions(local_only=False)
+        installed_dists = working_set
     else:
         installed_dists = get_installed_distributions()
 
